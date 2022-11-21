@@ -8,3 +8,5 @@ For the time being, the package can be installed from [my Anaconda channel](http
 ```
 conda install -c thomasdorch klayout-gui
 ```
+
+This package installs both the GUI (without a start-menu shortcut) and the KLayout Python package to the conda environment so the full KLayout Python API is accessable from the environment.
