@@ -1,0 +1,44 @@
+{% set name = "klayout-gui" %}
+{% set version = "0.27.12" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+  
+source:
+  url: https://github.com/KLayout/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  folder: klayout
+  sha256: 6ef5e6ae5ea387618663949a1efa105406aeb36db2d18d89eff0345955aae979
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - jom                                # [win]
+    - make                               # [not win]
+  host:
+    - python >3.6
+    - pip
+    - ruby >2
+    - qt-main >=5
+    - zlib
+  run:
+    - python >3.6
+    - ruby >2
+    - qt-main >=5		
+    - ucrt			# [win]
+    - zlib
+about:
+  home: https://www.klayout.de/
+  summary: 'Your Mask Layout Friend'
+  description: |
+    - View: Fast and accurate viewing of huge layout files
+    - Edit: Draw, modify and transform hierarchical layout
+    - Generate: Script layout generators, PCells and layout transformation tools
+    - Analyze: Search, verify, and measure layout and code analysis scripts
+  license: GPL-3.0
+  doc_url: https://www.klayout.de/doc.html
+  dev_url: https://github.com/KLayout/klayout
