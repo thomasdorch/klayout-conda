@@ -1,36 +1,45 @@
 {% set name = "klayout-gui" %}
-{% set version = "0.27.12" %}
+{%  set version = "0.27.13" %}
+{%    set python = "3.11"   %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
   
 source:
-  url: https://github.com/KLayout/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  url: https://github.com/KLayout/klayout/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 39c2347ed8aaeb73b7c4c6c806bd25b45b962d6006a26ef88cfa26b8212d3c23
   folder: klayout
-  sha256: 6ef5e6ae5ea387618663949a1efa105406aeb36db2d18d89eff0345955aae979
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - jom                                # [win]
-    - make                               # [not win]
+    - jom                     # [win]
+    - make                    # [not win]
+
   host:
-    - python >3.6
-    - pip
+    - python {{ python }}
     - ruby >2
     - qt-main >=5
+    - libpython-static
     - zlib
+
   run:
-    - python >3.6
+    - python {{ python }}
     - ruby >2
-    - qt-main >=5		
-    - ucrt			# [win]
-    - zlib
+    - qt-main >=5
+    - ucrt                    # [win]
+
+test:
+  commands:
+    - klayout -v
+  imports:
+    - klayout
+
 about:
   home: https://www.klayout.de/
   summary: 'Your Mask Layout Friend'
